@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="paradise_security.data_sentry.service_registry.encryptor" class="ParadiseSecurity\Component\ServiceRegistry\Registry\ServiceRegistry">
+            <argument>ParadiseSecurity\Component\DataSentry\Encryptor\EncryptorInterface</argument>
+            <argument>encryptor</argument>
+        </service>
+
+        <service id="paradise_security.data_sentry.service_registry.indexing_generator" class="ParadiseSecurity\Component\ServiceRegistry\Registry\ServiceRegistry">
+            <argument>ParadiseSecurity\Component\DataSentry\Generator\GeneratorInterface</argument>
+            <argument>generator</argument>
+        </service>
+
+        <service id="paradise_security.data_sentry.service_registry.blind_index_transformation" class="ParadiseSecurity\Component\ServiceRegistry\Registry\ServiceRegistry">
+            <argument>ParagonIE\CipherSweet\Contract\TransformationInterface</argument>
+            <argument>transformation</argument>
+        </service>
+    </services>
+</container>

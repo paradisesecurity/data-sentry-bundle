@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="true" />
+
+        <service id="paragon_ie.ciphersweet.backend.boring_crypto" class="ParagonIE\CipherSweet\Backend\BoringCrypto" />
+        <service id="ParagonIE\CipherSweet\Contract\BackendInterface" alias="paragon_ie.ciphersweet.backend.boring_crypto" />
+
+        <service id="paragon_ie.ciphersweet.backend.fips_crypto" class="ParagonIE\CipherSweet\Backend\FIPSCrypto" />
+        <service id="ParagonIE\CipherSweet\Contract\BackendInterface" alias="paragon_ie.ciphersweet.backend.fips_crypto" />
+
+        <service id="paragon_ie.ciphersweet.key_provider.string" class="ParagonIE\CipherSweet\KeyProvider\StringProvider">
+            <argument type="string" />
+        </service>
+        <service id="ParagonIE\CipherSweet\Contract\KeyProviderInterface" alias="paragon_ie.ciphersweet.key_provider.string" />
+
+        <service id="paragon_ie.ciphersweet.key_provider.file" class="ParagonIE\CipherSweet\KeyProvider\FileProvider">
+            <argument type="string" />
+        </service>
+        <service id="ParagonIE\CipherSweet\Contract\KeyProviderInterface" alias="paragon_ie.ciphersweet.key_provider.file" />
+    </services>
+</container>

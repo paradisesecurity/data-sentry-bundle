@@ -1,0 +1,56 @@
+{
+    "name": "paradisesecurity/data-sentry-bundle",
+    "type": "symfony-bundle",
+    "description": "Paradise Security Data Sentry Bundle.",
+    "homepage": "https://paradisesecurity.work",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paradise Security",
+            "email": "joe@paradisesecurity.work",
+            "homepage": "https://paradisesecurity.work",
+            "role": "Owner"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "doctrine/orm": "^2.7",
+        "paradisesecurity/data-sentry": "^0.1 || dev-master",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/yaml": "^5.4 || ^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "doctrine/doctrine-bundle": "^2.7",
+        "symfony/dependency-injection": "^5.4 || ^6.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ParadiseSecurity\\Bundle\\DataSentryBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "ParadiseSecurity\\Bundle\\DataSentryBundle\\Test\\": "tests/Test/" },
+        "files": [
+            "tests/app/AppKernel.php"
+        ]
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../*"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

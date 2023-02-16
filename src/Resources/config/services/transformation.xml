@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="paradise_security.data_sentry.encryptor.ciphersweet.resolver.blind_index_transformation" class="ParadiseSecurity\Component\DataSentry\Encryptor\CipherSweet\Resolver\BlindIndexTransformationResolver">
+            <argument type="service" id="paradise_security.data_sentry.service_registry.blind_index_transformation"/>
+        </service>
+        <service id="ParadiseSecurity\Component\DataSentry\Encryptor\CipherSweet\Resolver\BlindIndexTransformationResolverInterface" alias="paradise_security.data_sentry.encryptor.ciphersweet.resolver.blind_index_transformation"/>
+
+        <service id="paragon_ie.ciphersweet.transformation.alpha_characters_only" class="ParagonIE\CipherSweet\Transformation\AlphaCharactersOnly">
+            <tag name="paradise_security.data_sentry.blind_index_transformation" transformer="alpha_characters_only" />
+        </service>
+        <service id="paragon_ie.ciphersweet.transformation.alpha_numeric_characters_only" class="ParagonIE\CipherSweet\Transformation\AlphaNumericCharactersOnly">
+            <tag name="paradise_security.data_sentry.blind_index_transformation" transformer="alpha_numeric_characters_only" />
+        </service>
+        <service id="paragon_ie.ciphersweet.transformation.compound" class="ParagonIE\CipherSweet\Transformation\Compound">
+            <tag name="paradise_security.data_sentry.blind_index_transformation" transformer="compound" />
+        </service>
+        <service id="paragon_ie.ciphersweet.transformation.digits_only" class="ParagonIE\CipherSweet\Transformation\DigitsOnly">
+            <tag name="paradise_security.data_sentry.blind_index_transformation" transformer="digits_only" />
+        </service>
+        <service id="paragon_ie.ciphersweet.transformation.first_character" class="ParagonIE\CipherSweet\Transformation\FirstCharacter">
+            <tag name="paradise_security.data_sentry.blind_index_transformation" transformer="first_character" />
+        </service>
+        <service id="paragon_ie.ciphersweet.transformation.last_four_digits" class="ParagonIE\CipherSweet\Transformation\LastFourDigits">
+            <tag name="paradise_security.data_sentry.blind_index_transformation" transformer="last_four_digits" />
+        </service>     
+        <service id="paragon_ie.ciphersweet.transformation.lowercase" class="ParagonIE\CipherSweet\Transformation\Lowercase">
+            <tag name="paradise_security.data_sentry.blind_index_transformation" transformer="lowercase" />
+        </service>
+    </services>
+</container>

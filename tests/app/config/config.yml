@@ -1,0 +1,60 @@
+parameters:
+    database_driver: pdo_sqlite
+    database_path: "%kernel.project_dir%/app/db.sql"
+    secret: "EZvgjC5zNZsQUzKXCCESUjgQfX2DnYY8B"
+
+framework:
+    assets: false
+    secret: "%secret%"
+    router:
+        resource: "%kernel.project_dir%/app/config/routing.yml"
+    session:
+        handler_id: ~
+    http_method_override: true
+    test: ~
+    cache:
+        pools:
+            cache.test:
+                adapter: cache.adapter.array
+                public: false
+                default_lifetime: 0
+
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        path: "%database_path%"
+        charset: UTF8
+    orm:
+        entity_managers:
+            default:
+                auto_mapping: true
+
+paradise_security_data_sentry:
+    listeners:
+        test:
+            entity_manager: 'default'
+            entity_class_names:
+                - ParadiseSecurity\Component\DataSentry\Test\Model\FakeModel
+    encryptors:
+        supersweet_v1.0.1:
+            adapter_config:
+                ciphersweet:
+                    cryptography:
+                        key_provider: 'string'
+                        key: '8174f2b78ad4be9d512e28047b0ea67f618d1726e6f61b96394b02290c8e6570'
+                        crypto: 'boring'
+            cache_adapter: 'symfony_cache_pool'
+            cache_adapter_config:
+                symfony_cache_pool:
+                    cache_pool: cache.test
+        supersweet_v1.0.0:
+            adapter_config:
+                ciphersweet:
+                    cryptography:
+                        key_provider: 'string'
+                        key: 'e339e68dd4c0590cee28c153f608eda1f7e9fef0540cd694f7ec20a35ae6d062'
+                        crypto: 'fips'
+            cache_adapter: 'symfony_cache_pool'
+            cache_adapter_config:
+                symfony_cache_pool:
+                    cache_pool: cache.test

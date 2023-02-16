@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="paradise_security.data_sentry.generator.delegating" class="ParadiseSecurity\Component\DataSentry\Generator\DelegatingGenerator">
+            <argument type="service" id="paradise_security.data_sentry.service_registry.indexing_generator"/>
+        </service>
+        <service id="ParadiseSecurity\Component\DataSentry\Generator\DelegatingGeneratorInterface"
+                 alias="paradise_security.data_sentry.generator.delegating"/>
+
+        <service id="paradise_security.indexing_generator.value_starting_by"
+                 class="ParadiseSecurity\Component\DataSentry\Generator\ValueStartingByGenerator">
+            <tag name="paradise_security.data_sentry.indexing_generator" generator="value_starting_by" />
+        </service>
+        <service id="paradise_security.indexing_generator.value_ending_by"
+                 class="ParadiseSecurity\Component\DataSentry\Generator\ValueEndingByGenerator">
+            <tag name="paradise_security.data_sentry.indexing_generator" generator="value_ending_by" />
+        </service>        
+    </services>
+</container>

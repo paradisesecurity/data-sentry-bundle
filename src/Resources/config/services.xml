@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/indexing.xml"/>
+        <import resource="services/paragon_ie.xml"/>
+        <import resource="services/registry.xml"/>
+        <import resource="services/transformation.xml"/>
+    </imports>
+    <services>
+        <defaults public="true" />
+
+        <service id="ParadiseSecurity\Component\DataSentry\Metadata\EntityMetadata" />
+        <service id="ParadiseSecurity\Component\DataSentry\Metadata\EntityMetadataInterface" alias="ParadiseSecurity\Component\DataSentry\Metadata\EntityMetadata" />
+
+        <service id="paradise_security.data_sentry.metadata.collector" class="ParadiseSecurity\Component\DataSentry\Metadata\MetadataCollector">
+            <argument type="service" id="ParadiseSecurity\Component\DataSentry\Reader\AttributeReader" />
+        </service>
+        <service id="ParadiseSecurity\Component\DataSentry\Metadata\MetadataCollectorInterface" alias="paradise_security.data_sentry.metadata.collector" />
+
+        <service id="ParadiseSecurity\Component\DataSentry\Reader\AttributeReader">
+            <argument>ParadiseSecurity\Component\DataSentry\Attribute\AttributeInterface</argument>
+        </service>
+        <service id="ParadiseSecurity\Component\DataSentry\Reader\AttributeReaderInterface" alias="ParadiseSecurity\Component\DataSentry\Reader\AttributeReader" />
+
+        <service id="ParadiseSecurity\Component\DataSentry\Metadata\MetadataCache" />
+        <service id="ParadiseSecurity\Component\DataSentry\Metadata\MetadataCacheInterface" alias="ParadiseSecurity\Component\DataSentry\Metadata\MetadataCache" />
+
+        <service id="paradise_security.data_sentry.processor.entity" class="ParadiseSecurity\Component\DataSentry\Processor\EntityProcessor">
+            <argument type="service" id="paradise_security.data_sentry.metadata.collector" />
+            <argument type="service" id="ParadiseSecurity\Component\DataSentry\Request\RequestStack" />
+            <argument type="service" id="paradise_security.data_sentry.factory.request" />
+            <argument type="service" id="ParadiseSecurity\Component\DataSentry\Factory\SubRequestFactory" />
+            <argument type="service" id="ParadiseSecurity\Component\DataSentry\Handler\IndexingHandler" />
+            <argument type="service" id="ParadiseSecurity\Component\DataSentry\Hydrator\PropertyHydrator" />
+        </service>
+        <service id="ParadiseSecurity\Component\DataSentry\Processor\EntityProcessorInterface" alias="paradise_security.data_sentry.processor.entity" />
+
+        <service id="ParadiseSecurity\Component\DataSentry\Request\RequestStack" />
+        <service id="ParadiseSecurity\Component\DataSentry\Request\RequestStackInterface" alias="ParadiseSecurity\Component\DataSentry\Request\RequestStack" />
+
+        <service id="paradise_security.data_sentry.factory.request" class="ParadiseSecurity\Component\DataSentry\Factory\RequestFactory">
+            <argument type="service" id="paradise_security.data_sentry.resolver.encryptor"/>
+        </service>
+        <service id="ParadiseSecurity\Component\DataSentry\Factory\RequestFactoryInterface" alias="paradise_security.data_sentry.factory.request" />
+
+        <service id="paradise_security.data_sentry.resolver.encryptor" class="ParadiseSecurity\Component\DataSentry\Resolver\EncryptorResolver">
+            <argument type="service" id="paradise_security.data_sentry.service_registry.encryptor"/>
+        </service>
+        <service id="ParadiseSecurity\Component\DataSentry\Resolver\EncryptorResolverInterface" alias="paradise_security.data_sentry.resolver.encryptor" />
+
+        <service id="ParadiseSecurity\Component\DataSentry\Factory\SubRequestFactory" />
+        <service id="ParadiseSecurity\Component\DataSentry\Factory\SubRequestFactoryInterface" alias="ParadiseSecurity\Component\DataSentry\Factory\SubRequestFactory" />
+
+        <service id="ParadiseSecurity\Component\DataSentry\Hydrator\PropertyHydrator">
+            <argument type="service" id="property_accessor"/>
+        </service>
+        <service id="ParadiseSecurity\Component\DataSentry\Hydrator\PropertyHydratorInterface" alias="ParadiseSecurity\Component\DataSentry\Hydrator\PropertyHydrator" />
+
+        <service id="ParadiseSecurity\Component\DataSentry\Handler\IndexingHandler">
+            <argument type="service" id="paradise_security.data_sentry.generator.delegating"/>
+        </service>
+        <service id="ParadiseSecurity\Component\DataSentry\Handler\IndexingHandlerInterface" alias="ParadiseSecurity\Component\DataSentry\Handler\IndexingHandler" />
+    </services>
+</container>
